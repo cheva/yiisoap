@@ -1,12 +1,12 @@
 <?php
+
 class StockController extends CController
 {
 
-    public function actions()
-    {
+    public function actions() {
         return array(
-            'quote'=>array(
-                'class'=>'CWebServiceAction',
+            'quote' => array(
+                'class' => 'CWebServiceAction',
             ),
         );
     }
@@ -16,9 +16,9 @@ class StockController extends CController
      * @return float цена
      * @soap
      */
-    public function getPrice($symbol)
-    {
-        $prices=array('IBM'=>100, 'GOOGLE'=>350);
-        return isset($prices[$symbol])?$prices[$symbol]:0;
+    public function getPrice($symbol) {
+        $prices = array('IBM' => 100, 'GOOGLE' => 350);
+        return isset($prices[$symbol]) ? $prices[$symbol] : 0;
     }
+
 }

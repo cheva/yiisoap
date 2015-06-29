@@ -1,4 +1,8 @@
 <?php
+/**
+ * Referat class file
+ * @author cheva
+ */
 
 /**
  * This is the model class for table "referat".
@@ -6,6 +10,7 @@
  * The followings are the available columns in table 'referat':
  * @property integer $id
  * @property string $theme
+ * @property string $theme_alias
  * @property string $title
  * @property string $body
  */
@@ -23,6 +28,12 @@ class Referat extends CActiveRecord
      * @soap
      */
     public $theme;
+
+    /**
+     * @var string theme alias
+     * @soap
+     */
+    public $theme_alias;
 
     /**
      * @var string title
@@ -50,11 +61,12 @@ class Referat extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('theme, title', 'length', 'max' => 255),
+            array('theme, theme_alias, title', 'length', 'max' => 255),
+            array('theme, theme_alias, title', 'required'),
             array('body', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, theme, title, body', 'safe', 'on' => 'search'),
+            array('id, theme, theme_alias, title, body', 'safe', 'on' => 'search'),
         );
     }
 
@@ -75,6 +87,7 @@ class Referat extends CActiveRecord
         return array(
             'id' => 'ID',
             'theme' => 'Theme',
+            'theme_alias' => 'Theme Alias',
             'title' => 'Title',
             'body' => 'Body',
         );
@@ -99,6 +112,7 @@ class Referat extends CActiveRecord
 
         $criteria->compare('id', $this->id);
         $criteria->compare('theme', $this->theme, true);
+        $criteria->compare('theme_alias',$this->theme_alias,true);
         $criteria->compare('title', $this->title, true);
         $criteria->compare('body', $this->body, true);
 
@@ -119,7 +133,7 @@ class Referat extends CActiveRecord
     public function scopes() {
         return array(
             'lastRecord' => array(
-                'order' => '"orderField" DESC',
+                'order' => '`id` DESC',
                 'limit' => 1,
             ),
         );

@@ -1,3 +1,3 @@
 <?php
-$client=new SoapClient('http://yii.dev/index.php?r=referat/wsdl');
-print_r($client->getnew());
+require_once(dirname(__FILE__).'/getConfig.php');
+print_r($client->getNew($theme));
